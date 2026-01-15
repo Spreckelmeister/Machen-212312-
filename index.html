@@ -1,0 +1,407 @@
+import React, { useState } from 'react';
+import { Users, School, Wrench, BookOpen, Handshake, Target, CheckCircle, XCircle, Building, GraduationCap, Cog, ChevronDown, ChevronRight } from 'lucide-react';
+
+const CollapsibleSection = ({ title, icon: Icon, children, defaultOpen = false, color = "indigo" }) => {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+  
+  const colorClasses = {
+    indigo: "bg-indigo-100 text-indigo-600",
+    emerald: "bg-emerald-100 text-emerald-600",
+    amber: "bg-amber-100 text-amber-600",
+    purple: "bg-purple-100 text-purple-600",
+  };
+  
+  return (
+    <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full p-6 flex items-center justify-between hover:bg-gray-50 transition-colors"
+      >
+        <div className="flex items-center gap-3">
+          <div className={`p-2 rounded-lg ${colorClasses[color]}`}>
+            <Icon className="w-6 h-6" />
+          </div>
+          <h2 className="text-xl font-bold text-gray-800">{title}</h2>
+        </div>
+        <div className={`transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
+          <ChevronDown className="w-6 h-6 text-gray-400" />
+        </div>
+      </button>
+      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className="px-6 pb-6">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default function MINTVereinKonzept() {
+  const [showVorteile, setShowVorteile] = useState(true);
+  
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
+      <div className="max-w-5xl mx-auto space-y-4">
+        
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-indigo-900 mb-3">MINT-Förderverein Osnabrück</h1>
+          <p className="text-xl text-indigo-700">Konzeptskizze zur Vereinsgründung</p>
+          <div className="mt-4 inline-block bg-indigo-600 text-white px-6 py-2 rounded-full text-sm font-medium">
+            Arbeitstitel – e.V. in Gründung
+          </div>
+        </div>
+
+        {/* Vision Box - Always visible */}
+        <div className="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-indigo-500">
+          <div className="flex items-start gap-4">
+            <div className="bg-indigo-100 p-3 rounded-full">
+              <Target className="w-8 h-8 text-indigo-600" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">Vision</h2>
+              <p className="text-lg text-gray-600">
+                MINT-Bildung findet dort statt, wo Schülerinnen und Schüler sind – <strong>in ihren Schulen</strong>. 
+                Equipment, Expertise und Begeisterung kommen zu ihnen, nicht umgekehrt.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Alleinstellungsmerkmal - Always visible */}
+        <div className="bg-gradient-to-r from-amber-400 to-orange-500 rounded-2xl shadow-lg p-6 text-white">
+          <h3 className="text-xl font-bold mb-3">✨ Alleinstellungsmerkmal</h3>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="bg-white/20 rounded-xl p-4">
+              <p className="font-semibold">SFZ Osnabrück</p>
+              <p className="text-sm opacity-90">Außerschulische Lernorte</p>
+            </div>
+            <div className="bg-white/30 rounded-xl p-4 ring-2 ring-white">
+              <p className="font-semibold">MINT-Förderverein</p>
+              <p className="text-sm">Direkt AN den Schulen präsent</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Gründungsteam - Collapsible */}
+        <CollapsibleSection title="Gründungsteam" icon={Users} defaultOpen={true} color="indigo">
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-indigo-50 rounded-xl p-5 text-center">
+              <div className="w-16 h-16 bg-indigo-200 rounded-full mx-auto mb-3 flex items-center justify-center">
+                <span className="text-2xl">👩‍💼</span>
+              </div>
+              <h3 className="font-bold text-gray-800">Christina Suthe</h3>
+              <p className="text-indigo-600 font-medium">Geschäftsführerin</p>
+              <p className="text-sm text-gray-500 mt-2">Vollzeit, angestellt</p>
+              <p className="text-xs text-gray-400">+ Beisitzerin im Vorstand</p>
+            </div>
+            <div className="bg-indigo-50 rounded-xl p-5 text-center">
+              <div className="w-16 h-16 bg-indigo-200 rounded-full mx-auto mb-3 flex items-center justify-center">
+                <span className="text-2xl">👨‍💻</span>
+              </div>
+              <h3 className="font-bold text-gray-800">Patrick Kreutmann</h3>
+              <p className="text-indigo-600 font-medium">1. Vorsitzender</p>
+              <p className="text-sm text-gray-500 mt-2">Ehrenamtlich</p>
+            </div>
+            <div className="bg-indigo-50 rounded-xl p-5 text-center">
+              <div className="w-16 h-16 bg-indigo-200 rounded-full mx-auto mb-3 flex items-center justify-center">
+                <span className="text-2xl">👨‍🏫</span>
+              </div>
+              <h3 className="font-bold text-gray-800">Kai Krafft</h3>
+              <p className="text-indigo-600 font-medium">2. Vorsitzender</p>
+              <p className="text-sm text-gray-500 mt-2">Ehrenamtlich</p>
+            </div>
+          </div>
+        </CollapsibleSection>
+
+        {/* Vier Säulen - Collapsible */}
+        <CollapsibleSection title="Die vier Säulen" icon={BookOpen} defaultOpen={true} color="purple">
+          <div className="grid md:grid-cols-2 gap-6">
+            
+            <div className="border-2 border-blue-200 rounded-xl p-5 hover:border-blue-400 hover:shadow-md transition-all cursor-pointer">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="bg-blue-100 p-2 rounded-lg">
+                  <BookOpen className="w-6 h-6 text-blue-600" />
+                </div>
+                <h3 className="font-bold text-gray-800">Mathewerkstätten</h3>
+              </div>
+              <ul className="text-sm text-gray-600 space-y-1">
+                <li>• Grundschule: Handlungsorientiert</li>
+                <li>• Sek I/II: Problemlöseorientiert</li>
+                <li>• Konzept von Christina Suthe</li>
+              </ul>
+            </div>
+
+            <div className="border-2 border-green-200 rounded-xl p-5 hover:border-green-400 hover:shadow-md transition-all cursor-pointer">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="bg-green-100 p-2 rounded-lg">
+                  <Wrench className="w-6 h-6 text-green-600" />
+                </div>
+                <h3 className="font-bold text-gray-800">Makerspaces</h3>
+              </div>
+              <ul className="text-sm text-gray-600 space-y-1">
+                <li>• 3D-Druck & Lasercutter</li>
+                <li>• Mikrocontroller (Arduino, Calliope)</li>
+                <li>• Infento-Bausätze</li>
+                <li>• Reparaturwerkstätten</li>
+              </ul>
+            </div>
+
+            <div className="border-2 border-purple-200 rounded-xl p-5 hover:border-purple-400 hover:shadow-md transition-all cursor-pointer">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="bg-purple-100 p-2 rounded-lg">
+                  <GraduationCap className="w-6 h-6 text-purple-600" />
+                </div>
+                <h3 className="font-bold text-gray-800">Ganztags-Kurse</h3>
+              </div>
+              <ul className="text-sm text-gray-600 space-y-1">
+                <li>• Regelmäßige AGs</li>
+                <li>• Projektwochen</li>
+                <li>• Kursleitende: Studierende, Rentner, Schüler</li>
+              </ul>
+            </div>
+
+            <div className="border-2 border-orange-200 rounded-xl p-5 hover:border-orange-400 hover:shadow-md transition-all cursor-pointer">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="bg-orange-100 p-2 rounded-lg">
+                  <Cog className="w-6 h-6 text-orange-600" />
+                </div>
+                <h3 className="font-bold text-gray-800">Fortbildungen</h3>
+              </div>
+              <ul className="text-sm text-gray-600 space-y-1">
+                <li>• Lehrkräfte-Schulungen</li>
+                <li>• In Kooperation mit KOS</li>
+                <li>• Qualifizierung der Kursleitenden</li>
+              </ul>
+            </div>
+          </div>
+        </CollapsibleSection>
+
+        {/* Zielgruppen - Collapsible */}
+        <CollapsibleSection title="Zielgruppen" icon={School} color="indigo">
+          <div className="flex flex-wrap gap-3">
+            <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium hover:bg-blue-200 transition-colors cursor-pointer">Grundschulen</span>
+            <span className="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium hover:bg-green-200 transition-colors cursor-pointer">Sekundarstufe I</span>
+            <span className="bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-medium hover:bg-purple-200 transition-colors cursor-pointer">Sekundarstufe II</span>
+            <span className="bg-orange-100 text-orange-800 px-4 py-2 rounded-full font-medium hover:bg-orange-200 transition-colors cursor-pointer">Lehrkräfte</span>
+            <span className="bg-pink-100 text-pink-800 px-4 py-2 rounded-full font-medium hover:bg-pink-200 transition-colors cursor-pointer">Ganztagsbereich</span>
+          </div>
+        </CollapsibleSection>
+
+        {/* Kooperationspartner - Collapsible */}
+        <CollapsibleSection title="Kooperationen & Schnittstellen" icon={Handshake} color="emerald">
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="bg-gray-50 rounded-xl p-4 text-center hover:bg-gray-100 transition-colors cursor-pointer">
+              <p className="font-bold text-gray-800">KOS</p>
+              <p className="text-sm text-gray-500">Lehrerfortbildungen</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-4 text-center hover:bg-gray-100 transition-colors cursor-pointer">
+              <p className="font-bold text-gray-800">Medienzentrum</p>
+              <p className="text-sm text-gray-500">Geräteausleihe</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-4 text-center hover:bg-gray-100 transition-colors cursor-pointer">
+              <p className="font-bold text-gray-800">Stadt Osnabrück</p>
+              <p className="text-sm text-gray-500">Kooperationspartner</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-4 text-center hover:bg-gray-100 transition-colors cursor-pointer">
+              <p className="font-bold text-gray-800">Stiftungen</p>
+              <p className="text-sm text-gray-500">Finanzierung</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-4 text-center hover:bg-gray-100 transition-colors cursor-pointer">
+              <p className="font-bold text-gray-800">Hochschule/Uni</p>
+              <p className="text-sm text-gray-500">Kursleitende</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-4 text-center hover:bg-gray-100 transition-colors cursor-pointer">
+              <p className="font-bold text-gray-800">SFZ</p>
+              <p className="text-sm text-gray-500">Klare Abgrenzung</p>
+            </div>
+          </div>
+        </CollapsibleSection>
+
+        {/* Finanzierung - Collapsible */}
+        <CollapsibleSection title="Finanzierungsmodell" icon={Building} color="emerald">
+          <div className="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl p-6 text-white">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="font-bold mb-3 text-emerald-100">💰 Einnahmen</h3>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                    Stiftungsmittel (Fromm, Bohnenkamp, Stahlwerk)
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                    Startchancen-Mittel der Schulen
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                    Mitgliedsbeiträge
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                    Kommunale Zuschüsse
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-bold mb-3 text-emerald-100">📊 Ausgaben</h3>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                    Geschäftsführung (Vollzeit)
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                    Honorare Kursleitende
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                    Equipment & Material
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                    Verwaltung & Versicherung
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </CollapsibleSection>
+
+        {/* Vor- und Nachteile - Collapsible with Toggle */}
+        <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div className="p-6 border-b">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-bold text-gray-800">Warum ein Verein?</h2>
+              <div className="flex bg-gray-100 rounded-lg p-1">
+                <button
+                  onClick={() => setShowVorteile(true)}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${showVorteile ? 'bg-green-500 text-white' : 'text-gray-600 hover:text-gray-800'}`}
+                >
+                  ✓ Vorteile
+                </button>
+                <button
+                  onClick={() => setShowVorteile(false)}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${!showVorteile ? 'bg-red-500 text-white' : 'text-gray-600 hover:text-gray-800'}`}
+                >
+                  ✗ Nachteile
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="p-6">
+            {showVorteile ? (
+              <div className="space-y-3">
+                <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium text-gray-800">Gemeinnützigkeit</p>
+                    <p className="text-sm text-gray-600">Spendenquittungen, Steuerbegünstigung</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium text-gray-800">Förderfähigkeit</p>
+                    <p className="text-sm text-gray-600">Stiftungen fördern nur gemeinnützige Träger</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium text-gray-800">Institutionelle Glaubwürdigkeit</p>
+                    <p className="text-sm text-gray-600">Schulen kooperieren lieber mit Verein als mit Einzelpersonen</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium text-gray-800">Anstellung möglich</p>
+                    <p className="text-sm text-gray-600">Geschäftsführung rechtssicher beschäftigt, kein Scheinselbstständigkeits-Risiko</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium text-gray-800">Kontinuität</p>
+                    <p className="text-sm text-gray-600">Besteht unabhängig von Einzelpersonen weiter</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                <div className="flex items-start gap-3 p-3 bg-red-50 rounded-lg">
+                  <XCircle className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium text-gray-800">Gründungsaufwand</p>
+                    <p className="text-sm text-gray-600">Satzung, Notar, Registereintragung, Gemeinnützigkeitsantrag</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-3 bg-red-50 rounded-lg">
+                  <XCircle className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium text-gray-800">Verwaltungsaufwand</p>
+                    <p className="text-sm text-gray-600">Mitgliederversammlung, Vorstandssitzungen, Buchführung</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-3 bg-red-50 rounded-lg">
+                  <XCircle className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium text-gray-800">Vorstandshaftung</p>
+                    <p className="text-sm text-gray-600">Ehrenamtlicher Vorstand trägt Verantwortung</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-3 bg-red-50 rounded-lg">
+                  <XCircle className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium text-gray-800">Langsamere Entscheidungen</p>
+                    <p className="text-sm text-gray-600">Formale Strukturen können bremsen</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Nächste Schritte - Collapsible */}
+        <CollapsibleSection title="Nächste Schritte" icon={Target} defaultOpen={true} color="amber">
+          <div className="bg-indigo-900 rounded-xl p-6 text-white">
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-white/10 rounded-xl p-4 flex items-center gap-3 hover:bg-white/20 transition-colors cursor-pointer">
+                <span className="bg-white text-indigo-900 w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">1</span>
+                <span>Satzungsentwurf erstellen</span>
+              </div>
+              <div className="bg-white/10 rounded-xl p-4 flex items-center gap-3 hover:bg-white/20 transition-colors cursor-pointer">
+                <span className="bg-white text-indigo-900 w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">2</span>
+                <span>Gründungsversammlung planen</span>
+              </div>
+              <div className="bg-white/10 rounded-xl p-4 flex items-center gap-3 hover:bg-white/20 transition-colors cursor-pointer">
+                <span className="bg-white text-indigo-900 w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">3</span>
+                <span>Stiftungsgespräche führen</span>
+              </div>
+              <div className="bg-white/10 rounded-xl p-4 flex items-center gap-3 hover:bg-white/20 transition-colors cursor-pointer">
+                <span className="bg-white text-indigo-900 w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">4</span>
+                <span>Pilotschulen identifizieren</span>
+              </div>
+              <div className="bg-white/10 rounded-xl p-4 flex items-center gap-3 hover:bg-white/20 transition-colors cursor-pointer">
+                <span className="bg-white text-indigo-900 w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">5</span>
+                <span>Abgrenzungspapier SFZ erstellen</span>
+              </div>
+              <div className="bg-white/10 rounded-xl p-4 flex items-center gap-3 hover:bg-white/20 transition-colors cursor-pointer">
+                <span className="bg-white text-indigo-900 w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">6</span>
+                <span>Stellenprofil GF formulieren</span>
+              </div>
+            </div>
+          </div>
+        </CollapsibleSection>
+
+        {/* Footer */}
+        <div className="text-center text-gray-500 text-sm pt-4">
+          <p>Konzeptskizze Stand Januar 2026 | Entwurf zur internen Abstimmung</p>
+          <p className="text-xs mt-1">Klicke auf die Abschnitte zum Auf- und Zuklappen</p>
+        </div>
+
+      </div>
+    </div>
+  );
+}
